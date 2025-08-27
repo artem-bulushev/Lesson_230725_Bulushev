@@ -4,9 +4,9 @@ namespace Code
 {
     public class MedicineChest : MonoBehaviour
     {
-        void OnCollisionEnter(Collision otherObj)
+        private void OnTriggerEnter(Collider other)
         {
-            if (otherObj.gameObject.name == "Player 2")
+            if (other.TryGetComponent(out PlayerPhysics player))
             {
                 Destroy(gameObject);
                 Debug.LogError("Аптечка +1");

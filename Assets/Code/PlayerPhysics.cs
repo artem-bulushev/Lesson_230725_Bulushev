@@ -16,7 +16,7 @@ namespace Code
             _rb = GetComponent<Rigidbody>();
         }
 
-        void FixedUpdate()
+        void Update()
         {
             JumpLogic();
             MovementLogic();
