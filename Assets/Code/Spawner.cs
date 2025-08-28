@@ -5,31 +5,30 @@ namespace Code
     public class Spawner : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
-        public bool _time;
-        private float _timer;
+        [SerializeField] private float _spawnCooldown;
+        private float _spawnTimer;
+
+        private void Start()
+        {
+            ResetCooldown();
+        }
 
         private void Update()
         {
-            if (_time == true)
+            if (_spawnTimer > 0)
             {
-                _timer += Time.deltaTime;
-
-                if (_timer >= 5f)
-                {
-                    _timer = 0;
-                    Instantiate(prefab, transform.position, Quaternion.identity);
-                }
+                _spawnTimer -= Time.deltaTime;
             }
             else
             {
-                _timer += Time.deltaTime;
-
-                if (_timer >= 7f)
-                {
-                    _timer = 0;
-                    Instantiate(prefab, transform.position, Quaternion.identity);
-                }
+                Instantiate(prefab, transform.position, Quaternion.identity);
+                ResetCooldown();
             }
+        }
+
+        private void ResetCooldown()
+        {
+            _spawnTimer = _spawnCooldown;
         }
     }
 }
